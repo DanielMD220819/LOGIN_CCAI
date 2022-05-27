@@ -1,0 +1,43 @@
+<body class="main-bg">
+  <div class="login-container text-c animated flipInX" style="align-items: center;">
+    <div *ngIf="!loading" class="container-content">
+      <img class="logo" src="../../../assets/img/iniciar.png" alt="">
+      <h3 class="text-whitesmoke">Registrarse</h3>
+      <p class="text-whitesmoke">Crea una cuenta</p>
+      <span *ngIf="submitted && registrarUsuario.invalid" class="badge bg-danger">TODOS LOS CAMPOS SON OBLIGATORIOS</span>
+      <form (ngSubmit)="registrar()" class="form-floating margin-t" [formGroup]="registrarUsuario">
+        <div class="form-group mb-3">
+          <input type="text" class="form-control" formControlName="name" placeholder="Nombre" required="">
+          <span *ngIf="registrarUsuario.get('name')?.hasError('required') && registrarUsuario.get('name')?.touched" class="badge error-label text-danger">El nombre es requerido</span>
+          <span *ngIf="registrarUsuario.get('name')?.hasError('minlenght') && registrarUsuario.get('name')?.touched" class="badge error-label text-danger">Debe tener como mínimo 10 caracteres</span>
+        </div>
+        <div class="form-group mb-3">
+          <input type="text" class="form-control" formControlName="lastname" placeholder="Apellidos" required="">
+          <span *ngIf="registrarUsuario.get('lastname')?.hasError('required') && registrarUsuario.get('lastname')?.touched" class="badge error-label text-danger">El apellido es requerido</span>
+        </div>
+        <div class="form-group mb-3">
+          <input type="text" class="form-control" formControlName="email" placeholder="Correo" required="">
+          <span *ngIf="registrarUsuario.get('email')?.hasError('required') && registrarUsuario.get('email')?.touched" class="badge error-label text-danger">El correo es requerido</span>
+          <span *ngIf="registrarUsuario.get('email')?.hasError('email') && registrarUsuario.get('email')?.touched" class="badge error-label text-danger">El correo es invalido</span>
+        </div>
+        <div class="form-group mb-3">
+          <input type="password" class="form-control" formControlName="password" placeholder="Contraseña"
+          required="">
+          <span *ngIf="registrarUsuario.get('password')?.hasError('required') && registrarUsuario.get('password')?.touched" class="badge error-label text-danger">La contraseña es requerida</span>
+          <span *ngIf="registrarUsuario.get('password')?.hasError('minlength') && registrarUsuario.get('password')?.touched" class="badge error-label text-danger">La contraseña debe tener 6 caracteres</span>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" formControlName="repetirPassword" placeholder="Repetir contraseña" required="">
+          <span *ngIf="registrarUsuario.get('repetirPassword')?.hasError('required') && registrarUsuario.get('repetirPassword')?.touched" class="badge error-label text-danger">La contraseña no coincide</span>
+        </div>
+        <div class="d-grid gap-2">
+          <button [disabled]="registrarUsuario.invalid" class="btn btn-primary mb-5" type="submit">Aceptar</button>
+        </div>
+      </form>
+      <p class="text-whitesmoke text-center"><small>¿Ya tienes una cuenta?</small></p>
+      <a class="text-darkyellow" href="#" routerLink="/login"><small>Ingresa con tu cuenta!!!</small></a>
+      <p class="margin-t text-whitesmoke"><small> DMD & MDAG &copy; 2022</small> </p>
+    </div>
+    <app-spinner *ngIf="loading"></app-spinner>
+  </div>
+</body>
